@@ -20,28 +20,20 @@ RUN apt-get update && apt-get install -y \
     npm \
     && rm -rf /var/lib/apt/lists/*
 
-# Install TTYD
-RUN git clone --recurse-submodules https://github.com/tsl0922/ttyd.git && \
-    cd ttyd && \
-    mkdir build && \
-    cd build && \
-    cmake .. && \
-    make && \
-    make install && \
-    cd ../.. && \
-    rm -rf ttyd
+# Install GateOne
+RUN pip3 install GateOne
 
 # Clone the Vaim-sms repository
 RUN git clone https://github.com/VaimpierOfficial/Vaim-sms.git
 
-# Install required Python packages
+# Install required Python packages for your application, if any
 RUN pip3 install requests
 
 # Set the working directory
 WORKDIR /Vaim-sms
 
-# Expose the port for TTYD
-EXPOSE 10000
+# Expose the port for GateOne (default is 443)
+EXPOSE 443
 
-# Setup command to start TTYD with Python script
-CMD ["bash", "-c", "ttyd -p 10000 python3 Vaim-sms.py"]
+# Start GateOne with the specified configuration
+CMD ["gateone"]
