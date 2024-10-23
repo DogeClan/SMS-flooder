@@ -12,7 +12,10 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     g++ \
-    libjsoncpp-dev \
+    libjson-c-dev \  
+    libuv1-dev \      
+    zlib1g-dev \
+    libwebsockets-dev \     
     nodejs \
     npm \
     && rm -rf /var/lib/apt/lists/*
